@@ -1,5 +1,5 @@
 type: polynomials
-root: ${oc.env:ATLAS_DATA_ROOT,./datasets}
+root: ${oc.env:DATA_ROOT,./datasets}
 image_size: 32
 channels: 1
 download: false

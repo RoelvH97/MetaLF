@@ -7,12 +7,12 @@ from typing import ClassVar
 import jax
 import jax.numpy as jnp
 
-from models import ATLAS, ENF, Functa, SpatialFuncta
+from models import ENF, AttentiveLatentField, Functa, SpatialFuncta
 
 
 class ModelFactory:
     models: ClassVar[dict[str, type]] = {
-        "atlas": ATLAS,
+        "attentive_latent_field": AttentiveLatentField,
         "enf": ENF,
         "functa": Functa,
         "spatial_functa": SpatialFuncta,

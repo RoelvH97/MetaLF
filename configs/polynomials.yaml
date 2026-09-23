@@ -1,6 +1,6 @@
 defaults:
   - base
-  - experiment: polynomial_atlas
+  - experiment: polynomial_attentive_latent_field
   - _self_
 
 task: reconstruct

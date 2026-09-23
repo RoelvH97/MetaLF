@@ -16,7 +16,9 @@ def convert_config(source, task):
     config.task = task
     config.output_dir = f"runs/{task}"
     model = dict(source["model"])
-    kind = {"spatial_token": "atlas", "modulated_siren": "functa"}.get(model["type"], model["type"])
+    kind = {"spatial_token": "attentive_latent_field", "modulated_siren": "functa"}.get(
+        model["type"], model["type"]
+    )
     inactive = {
         "use_mask_token": False,
         "n_global_tokens": 0,
@@ -30,14 +32,14 @@ def convert_config(source, task):
         raise ValueError("Checkpoint requires non-spatial self-attention")
     if model.get("spatial_grid") is not None:
         raise ValueError("Anisotropic SpatialFuncta checkpoints are outside this release")
-    if kind == "atlas":
+    if kind == "attentive_latent_field":
         model["content_query"] = model.get("sa_content_query", False)
         model["sa_film_base"] = model.get("sa_film_base", "content")
         model["decoder_ff"] = model.get("decoder_ff", False)
         model["sa_gaussian_window"] = model.get("sa_gaussian_window")
         if model["sa_gaussian_window"] is None:
             model["sa_gaussian_window"] = model.get("gaussian_window", True)
-    if kind in ("atlas", "enf"):
+    if kind in ("attentive_latent_field", "enf"):
         model["bounded_pose"] = model.get("bounded_pose", False)
     allowed = {field.name for field in fields(ModelFactory.models[kind])}
     config.model = {"type": kind, **{key: value for key, value in model.items() if key in allowed}}
@@ -46,7 +48,7 @@ def convert_config(source, task):
         data["type"], data["type"]
     )
     config.data = OmegaConf.load(root / "data" / f"{data_kind}.yaml")
-    if task == "reconstruct" and data_kind == "cifar" and kind == "atlas":
+    if task == "reconstruct" and data_kind == "cifar" and kind == "attentive_latent_field":
         config.evaluation.dtype = "float64"
     for old, new in {
         "img_size": "image_size",
@@ -108,8 +110,10 @@ def convert_config(source, task):
                 p[new] = data[old]
     if task == "classify":
         head = source["classifier"]
-        if kind != "atlas" or head["type"] != "pooled_linear":
-            raise ValueError("Only ATLAS pooled-head classification checkpoints are included")
+        if kind != "attentive_latent_field" or head["type"] != "pooled_linear":
+            raise ValueError(
+                "Only attentive-latent-field pooled-head classification checkpoints are included"
+            )
         cfg = source["meta_classify"]
         if cfg.get("n_keep", 0) or cfg.get("mask_mode", "bottleneck") != "bottleneck":
             raise ValueError("Masked-decoding classifiers are outside this release")

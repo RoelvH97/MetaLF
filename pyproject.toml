@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "atlas-inr"
+name = "attentive-latent-fields"
 version = "0.1.0"
-description = "Meta-learned neural fields with spatial attention"
+description = "Meta-learned attentive latent fields: neural fields with spatial attention"
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
 dependencies = [

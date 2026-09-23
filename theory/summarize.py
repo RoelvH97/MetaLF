@@ -16,7 +16,9 @@ def main():
     for path in args.reports:
         report = json.loads(path.read_text())
         model = report["model"]
-        label = model["type"] + (f" SA{model['n_self_attn']}" if model["type"] == "atlas" else "")
+        label = model["type"] + (
+            f" SA{model['n_self_attn']}" if model["type"] == "attentive_latent_field" else ""
+        )
         key = (label, report["gradient_rule"])
         seeds = groups.setdefault(key, {})
         if report["seed"] in seeds:

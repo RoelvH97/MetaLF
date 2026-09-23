@@ -1,15 +1,15 @@
-# ATLAS: Attentive Latent Spaces
+# Meta-Learned Attentive Latent Fields
 
 ### Optimization Encoders: Rethinking Second-Order Meta-Learning for Neural Fields
 
-ATLAS encodes a signal by adapting the poses and content of a latent pointcloud by
-optimizing a few reconstruction steps. We meta-learn this process end to end, so gradients
-from the outer task objective flow through every inner update and shape the
-representation it produces. Reconstruction updates can therefore form an encoder
+Meta-learned attentive latent fields encode a signal by adapting the poses and content
+of a latent pointcloud over a few reconstruction steps. We meta-learn this process end
+to end, so gradients from the outer task objective flow through every inner update and
+shape the representation it produces. Reconstruction updates can therefore form an encoder
 for tasks such as classification or segmentation, without requiring the inner and
 outer losses to match.
 
-![ATLAS encodes observations by adapting a latent pointcloud that represents a signal, with outer objectives for different tasks](docs/figure_2_v2.png)
+![An attentive latent field encodes observations by adapting a latent pointcloud that represents a signal, with outer objectives for different tasks](docs/figure_2_v2.png)
 
 Self-attention lets latent tokens share information, while coordinate queries decode the
 continuous signal. Attention uses relative geometry, so moving the tokens moves the
@@ -19,7 +19,8 @@ represented field. At test time, the decoder stays fixed and only the tokens ada
   <img src="docs/figure_3.png" width="620" alt="Spatial self-attention combines token content with relative geometry">
 </p>
 
-[Installation](#installation) · [Examples](#examples) · [Experiment with ATLAS](#experiment-with-atlas)
+[Installation](#installation) · [Examples](#examples)
+· [Experiment with attentive latent fields](#experiment-with-attentive-latent-fields)
 · [Pretrained models](#pretrained-models)
 
 ## Installation
@@ -105,10 +106,10 @@ python polynomial_fields.py mode=analyze \
 The analysis writes `polynomial_metrics.json` with PSNR, effective rank, and tangent
 fraction. Run `python polynomial_fields.py` for the full training recipe.
 
-## Experiment with ATLAS
+## Experiment with attentive latent fields
 
-The default ATLAS has 25 tokens, 64 content channels, and four self-attention layers.
-Change the token representation directly from the command line:
+The default attentive latent field has 25 tokens, 64 content channels, and four
+self-attention layers. Change the token representation directly from the command line:
 
 ```bash
 python meta_reconstruct.py model.n_latents=36 model.latent_channels=32
@@ -137,11 +138,11 @@ reuse the adaptation loop in [meta_learning/](meta_learning/).
 ## Pretrained models
 
 The companion checkpoint bundle contains pretrained models for the examples above.
-Place its contents in `checkpoints/`, then try ATLAS on a few CIFAR-10 images:
+Place its contents in `checkpoints/`, then try an attentive latent field on a few CIFAR-10 images:
 
 ```bash
 python meta_reconstruct.py mode=evaluate data.download=true data.root=./datasets \
-  checkpoint=checkpoints/cifar/reconstruction/atlas_r2_s42.npz \
+  checkpoint=checkpoints/cifar/reconstruction/attentive_latent_field_r2_s42.npz \
   data.limit_eval=16 output_dir=runs/pretrained
 ```
 

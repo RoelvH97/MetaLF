@@ -1,4 +1,4 @@
-"""ATLAS: adaptable posed tokens with geometry-conditioned self-attention."""
+"""Attentive latent field: adaptable posed tokens with geometry-conditioned self-attention."""
 
 import flax.linen as nn
 
@@ -6,7 +6,7 @@ from .attention import SpatialAttention, geglu
 from .geometry import bound_pose, pose_dimension, relative_coordinates
 
 
-class ATLAS(nn.Module):
+class AttentiveLatentField(nn.Module):
     """Decode coordinates from tokens with a pose and scalar content features.
 
     Self-attention exchanges content between tokens; cross-attention reads the

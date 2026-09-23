@@ -1,6 +1,6 @@
 defaults:
   - base
-  - experiment: cifar_classify_atlas
+  - experiment: cifar_classify_attentive_latent_field
   - _self_
 
 task: classify

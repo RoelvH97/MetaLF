@@ -1,5 +1,5 @@
 type: ombria
-root: ${oc.env:ATLAS_DATA_ROOT,./datasets}/OMBRIA
+root: ${oc.env:DATA_ROOT,./datasets}/OMBRIA
 image_size: 256
 channels: 8
 download: false

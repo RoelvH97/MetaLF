@@ -1,6 +1,6 @@
 defaults:
   - base
-  - experiment: cifar_reconstruct_atlas
+  - experiment: cifar_reconstruct_attentive_latent_field
   - _self_
 
 task: reconstruct

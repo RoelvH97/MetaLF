@@ -1,7 +1,7 @@
 # @package _global_
 defaults:
   - ombria
-  - override /model: atlas
+  - override /model: attentive_latent_field
   - override /data: ombria
   - _self_
 model:

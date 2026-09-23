@@ -1,6 +1,6 @@
 # @package _global_
 defaults:
-  - override /model: atlas
+  - override /model: attentive_latent_field
   - override /data: cifar
   - _self_
 evaluation:

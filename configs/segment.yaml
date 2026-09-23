@@ -1,6 +1,6 @@
 defaults:
   - base
-  - experiment: ombria_atlas
+  - experiment: ombria_attentive_latent_field
   - _self_
 
 task: segment

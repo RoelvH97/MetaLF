@@ -1,5 +1,5 @@
 defaults:
-  - model: atlas
+  - model: attentive_latent_field
   - data: cifar
   - training: maml
   - _self_

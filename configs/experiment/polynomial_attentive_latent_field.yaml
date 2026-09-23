@@ -1,6 +1,6 @@
 # @package _global_
 defaults:
   - polynomial
-  - override /model: atlas
+  - override /model: attentive_latent_field
   - override /data: polynomials
   - _self_

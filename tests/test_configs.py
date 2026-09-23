@@ -16,7 +16,7 @@ RECIPES = [
         ("segment", "ombria"),
         ("polynomials", "polynomial"),
     ]
-    for model in ("atlas", "enf", "functa", "spatial_functa")
+    for model in ("attentive_latent_field", "enf", "functa", "spatial_functa")
     if not (task == "polynomials" and model == "spatial_functa")
 ]
 

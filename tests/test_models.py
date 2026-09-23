@@ -5,13 +5,13 @@ import pytest
 
 from meta_learning.adaptation import Adaptation
 from meta_learning.model import ModelFactory
-from models import ATLAS, ENF, Functa, SpatialFuncta
+from models import ENF, AttentiveLatentField, Functa, SpatialFuncta
 
 
 @pytest.mark.parametrize(
     "model",
     [
-        ATLAS(
+        AttentiveLatentField(
             n_latents=4,
             latent_channels=4,
             model_dim=16,
@@ -41,8 +41,8 @@ def test_model_adapts_with_finite_meta_gradients(model):
     assert any(np.count_nonzero(leaf) for leaf in jax.tree.leaves(gradient["meta_lr"]))
 
 
-def test_atlas_translation_equivariance():
-    model = ATLAS(
+def test_attentive_latent_field_translation_equivariance():
+    model = AttentiveLatentField(
         n_latents=4,
         latent_channels=4,
         model_dim=16,
